@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC, Fragment, useEffect } from 'react'
 import Head from 'next/head'
-import Container from '@material-ui/core/Container'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import AuthContainer from '../../containers/auth-container'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -13,13 +13,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const IndexPage: FC = () => {
+const SignInPage: FC = () => {
   const classes = useStyles()
+  const authContainer = AuthContainer.useContainer()
+
+  useEffect(() => {
+    location.href = authContainer.getAuthorizationUrl()
+  }, [])
 
   return (
     <Fragment>
       <Head>
-        <title>Home - Todo</title>
+        <title>Sign in - Todo</title>
       </Head>
       <div className={classes.content}>
         <div className={classes.toolbar} />
@@ -28,4 +33,4 @@ const IndexPage: FC = () => {
   )
 }
 
-export default IndexPage
+export default SignInPage

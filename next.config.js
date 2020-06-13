@@ -1,0 +1,13 @@
+require('dotenv').config()
+
+module.exports = {
+  env: {
+    OAUTH2_CLIENT_ID: process.env.OAUTH2_CLIENT_ID,
+    OAUTH2_CLIENT_SECRET: process.env.OAUTH2_CLIENT_SECRET,
+    OAUTH2_ACCESS_TOKEN_URL: process.env.OAUTH2_ACCESS_TOKEN_URL,
+    OAUTH2_AUTHORIZATION_URL: process.env.OAUTH2_AUTHORIZATION_URL,
+    OAUTH2_REDIRECT_URL: process.env.OAUTH2_REDIRECT_URL,
+    OAUTH2_USERINFO_URL: process.env.OAUTH2_USERINFO_URL,
+    API_BASE_URL: process.env.API_BASE_URL
+  }
+}

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ext ./ 'src/**/*.{js,jsx,ts,tsx}'",
@@ -12,9 +12,27 @@
     "test:ci": "jest -w 1"
   },
   "dependencies": {
+    "@material-ui/core": "^4.9.9",
+    "@material-ui/icons": "^4.9.1",
+    "@types/lodash": "^4.14.149",
+    "@types/qs": "^6.9.1",
+    "axios": "^0.19.2",
+    "axios-mock-adapter": "^1.18.1",
+    "camelcase-keys": "^6.2.2",
+    "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "next": "9.3.4",
+    "power-assert": "^1.6.1",
+    "qs": "^6.9.3",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-toastify": "^6.0.5",
+    "snakecase-keys": "^3.1.2",
+    "unstated-next": "^1.1.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^3.2.1",
@@ -33,6 +51,7 @@
     "eslint-plugin-react-hooks": "^3.0.0",
     "jest": "^25.2.7",
     "prettier": "^2.0.2",
+    "ts-jest": "^25.3.1",
     "typescript": "^3.8.3"
   }
 }
