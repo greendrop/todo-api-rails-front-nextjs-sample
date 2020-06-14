@@ -1,4 +1,5 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC, Fragment, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 
@@ -14,6 +15,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const IndexPage: FC = () => {
   const classes = useStyles()
+  const router = useRouter()
+
+  useEffect(() => {
+    localStorage.setItem('signedIn.path', router.asPath)
+  }, [])
 
   return (
     <Fragment>

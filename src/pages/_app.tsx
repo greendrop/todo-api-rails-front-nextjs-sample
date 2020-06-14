@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import theme from '../themes/default'
 import { ToastContainer } from 'react-toastify'
 import AuthContainer from '../containers/auth-container'
+import TaskListContainer from '../containers/task-list-container'
 import AppContent from '../components/organisms/AppContent'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -33,7 +34,9 @@ export default function MyApp(props: AppProps) {
         <div style={{ display: 'flex' }}>
           <CssBaseline />
           <AuthContainer.Provider>
-            <AppContent {...props} />
+            <TaskListContainer.Provider>
+              <AppContent {...props} />
+            </TaskListContainer.Provider>
           </AuthContainer.Provider>
         </div>
       </ThemeProvider>
