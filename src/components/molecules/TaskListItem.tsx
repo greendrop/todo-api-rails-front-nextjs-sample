@@ -11,7 +11,7 @@ type Props = {
   task: ITask
 }
 
-const TaskListItemComponent: FC<Props> = (props) => {
+const TaskListItem: FC<Props> = (props) => {
   return (
     <Card>
       <CardContent>
@@ -31,4 +31,4 @@ const TaskListItemComponent: FC<Props> = (props) => {
   )
 }
 
-export default TaskListItemComponent
+export default TaskListItem

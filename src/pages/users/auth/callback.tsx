@@ -32,9 +32,9 @@ const CallbackPage: FC = () => {
   useEffect(() => {
     if (authContainer.isSignedIn()) {
       toast.info('Signed in')
-      const path = localStorage.getItem('signedIn.path')
-      if (path && path !== '') {
-        Router.push(path)
+      const backPath = localStorage.getItem('signedIn.backPath')
+      if (backPath && backPath !== '') {
+        Router.push(backPath)
       } else {
         Router.push('/')
       }

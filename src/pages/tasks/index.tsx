@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import AuthContainer from '../../containers/auth-container'
-import TaskListBodyComponent from '../../components/organisms/TaskListBodyComponent'
+import TaskListBody from '../../components/organisms/TaskListBody'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +23,7 @@ const IndexPage: FC = () => {
   const authContainer = AuthContainer.useContainer()
 
   useEffect(() => {
-    localStorage.setItem('signedIn.path', router.asPath)
+    localStorage.setItem('signedIn.backPath', router.asPath)
     if (!authContainer.isSignedIn()) {
       Router.push('/users/sign_in')
     }
@@ -38,7 +38,7 @@ const IndexPage: FC = () => {
         <div className={classes.toolbar} />
         <Container maxWidth="sm">
           <Typography variant="h3">Tasks</Typography>
-          <TaskListBodyComponent />
+          <TaskListBody />
         </Container>
       </div>
     </Fragment>

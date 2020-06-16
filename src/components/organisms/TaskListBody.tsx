@@ -1,10 +1,10 @@
 import React, { FC, Fragment, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import TaskListContainer from '../../containers/task-list-container'
-import TaskListItemComponent from '../molecules/TaskListItemComponent'
+import TaskListItem from '../molecules/TaskListItem'
 import Spinner from '../atoms/Spinner'
 
-const TaskListBodyComponent: FC = () => {
+const TaskListBody: FC = () => {
   const router = useRouter()
   const taskListContainer = TaskListContainer.useContainer()
 
@@ -19,11 +19,11 @@ const TaskListBodyComponent: FC = () => {
   return (
     <Fragment>
       {taskListContainer.tasks.map((task) => {
-        return <TaskListItemComponent key={task.id} task={task} />
+        return <TaskListItem key={task.id} task={task} />
       })}
       {taskListContainer.isFetching && <Spinner />}
     </Fragment>
   )
 }
 
-export default TaskListBodyComponent
+export default TaskListBody

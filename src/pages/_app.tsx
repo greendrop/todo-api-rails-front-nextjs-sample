@@ -7,6 +7,7 @@ import theme from '../themes/default'
 import { ToastContainer } from 'react-toastify'
 import AuthContainer from '../containers/auth-container'
 import TaskListContainer from '../containers/task-list-container'
+import TaskDetailContainer from '../containers/task-detail-container'
 import AppContent from '../components/organisms/AppContent'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -35,7 +36,9 @@ export default function MyApp(props: AppProps) {
           <CssBaseline />
           <AuthContainer.Provider>
             <TaskListContainer.Provider>
-              <AppContent {...props} />
+              <TaskDetailContainer.Provider>
+                <AppContent {...props} />
+              </TaskDetailContainer.Provider>
             </TaskListContainer.Provider>
           </AuthContainer.Provider>
         </div>
