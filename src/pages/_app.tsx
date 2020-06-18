@@ -8,6 +8,8 @@ import { ToastContainer } from 'react-toastify'
 import AuthContainer from '../containers/auth-container'
 import TaskListContainer from '../containers/task-list-container'
 import TaskDetailContainer from '../containers/task-detail-container'
+import TaskCreateContainer from '../containers/task-create-container'
+import TaskFormContainer from '../containers/task-form-container'
 import AppContent from '../components/organisms/AppContent'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -37,7 +39,11 @@ export default function MyApp(props: AppProps) {
           <AuthContainer.Provider>
             <TaskListContainer.Provider>
               <TaskDetailContainer.Provider>
-                <AppContent {...props} />
+                <TaskCreateContainer.Provider>
+                  <TaskFormContainer.Provider>
+                    <AppContent {...props} />
+                  </TaskFormContainer.Provider>
+                </TaskCreateContainer.Provider>
               </TaskDetailContainer.Provider>
             </TaskListContainer.Provider>
           </AuthContainer.Provider>

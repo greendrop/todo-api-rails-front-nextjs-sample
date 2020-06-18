@@ -2,9 +2,11 @@ import React, { FC, Fragment, useEffect } from 'react'
 import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import Container from '@material-ui/core/Container'
+import Fab from '@material-ui/core/Fab'
+import Icon from '@material-ui/core/Icon'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import AuthContainer from '../../containers/auth-container'
+import TaskListHeader from '../../components/organisms/TaskListHeader'
 import TaskListBody from '../../components/organisms/TaskListBody'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -14,6 +16,11 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),
     },
     toolbar: theme.mixins.toolbar,
+    fab: {
+      position: 'absolute',
+      bottom: theme.spacing(2),
+      right: theme.spacing(2),
+    },
   })
 )
 
@@ -37,8 +44,15 @@ const IndexPage: FC = () => {
       <div className={classes.content}>
         <div className={classes.toolbar} />
         <Container maxWidth="sm">
-          <Typography variant="h3">Tasks</Typography>
+          <TaskListHeader />
           <TaskListBody />
+          <Fab
+            color="primary"
+            className={classes.fab}
+            onClick={() => Router.push('/tasks/new')}
+          >
+            <Icon className="fas fa-plus" />
+          </Fab>
         </Container>
       </div>
     </Fragment>

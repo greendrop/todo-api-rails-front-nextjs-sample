@@ -5,15 +5,26 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { ITask } from '../../models/task'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    card: {
+      marginBottom: theme.spacing(1),
+    },
+  })
+)
 
 type Props = {
   task: ITask
 }
 
 const TaskListItem: FC<Props> = (props) => {
+  const classes = useStyles()
+
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardContent>
         <Typography variant="h5">{props.task.title}</Typography>
       </CardContent>
@@ -21,7 +32,7 @@ const TaskListItem: FC<Props> = (props) => {
         <Button
           size="small"
           onClick={() => {
-            Router.push(`/tasks/${props.task.id}`)
+            Router.push('/tasks/[id]', `/tasks/${props.task.id}`)
           }}
         >
           Detail

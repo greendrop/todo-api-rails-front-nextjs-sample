@@ -3,9 +3,9 @@ import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import Container from '@material-ui/core/Container'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import TaskDetailHeader from '../../../components/organisms/TaskDetailHeader'
-import TaskDetailBody from '../../../components/organisms/TaskDetailBody'
-import AuthContainer from '../../../containers/auth-container'
+import AuthContainer from '../../containers/auth-container'
+import NewTaskHeader from '../../components/organisms/NewTaskHeader'
+import NewTaskBody from '../../components/organisms/NewTaskBody'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -17,35 +17,32 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const IndexPage: FC = () => {
+const NewPage: FC = () => {
   const classes = useStyles()
   const router = useRouter()
   const authContainer = AuthContainer.useContainer()
 
   useEffect(() => {
-    if (router.query.id) {
-      localStorage.setItem('signedIn.backPath', router.asPath)
-      if (!authContainer.isSignedIn()) {
-        Router.push('/users/sign_in')
-      }
+    localStorage.setItem('signedIn.backPath', router.asPath)
+    if (!authContainer.isSignedIn()) {
+      Router.push('/users/sign_in')
     }
-  }, [router.query.id])
+  }, [])
 
   return (
     <Fragment>
       <Head>
-        <title>Task Detail - Todo</title>
+        <title>New Task - Todo</title>
       </Head>
       <div className={classes.content}>
         <div className={classes.toolbar} />
         <Container maxWidth="sm">
-          <TaskDetailHeader />
-          {router.query.id && <TaskDetailBody />}
-          {!router.query.id && <Fragment />}
+          <NewTaskHeader />
+          <NewTaskBody />
         </Container>
       </div>
     </Fragment>
   )
 }
 
-export default IndexPage
+export default NewPage

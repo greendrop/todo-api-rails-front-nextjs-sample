@@ -2,38 +2,34 @@ import { useState } from 'react'
 import { createContainer } from 'unstated-next'
 import { AxiosError } from 'axios'
 import { ITask, convertApiTaskToTask } from '../models/task'
+import { ITaskForm } from '../models/task'
 import TaskRepository from '../repositories/task-repository'
 import AuthContainer from './auth-container'
 
 const initialTask: ITask = {
   id: 0,
   title: '',
-  description: '',
+  description: null,
   done: false,
   createdAt: null,
   updatedAt: null,
 }
 
-const useTaskDetail = () => {
+const useTaskCreate = () => {
   const [task, setTask] = useState<ITask>(initialTask)
-  const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [isCreating, setIsCreating] = useState<boolean>(false)
   const [isError, setIsError] = useState<boolean>(false)
   const [errorStatus, setErrorStatus] = useState<number | null>(null)
   const [errorData, setErrorData] = useState<string | null>(null)
   const authContainer = AuthContainer.useContainer()
 
-  const clearTask = () => {
-    setTask(initialTask)
-  }
-
-  const fetchTaskById = async (id: number) => {
-    clearTask()
-    setIsFetching(true)
+  const createTask = async (taskForm: ITaskForm) => {
+    setIsCreating(true)
     setIsError(false)
     TaskRepository.setHeaderAuthorization(
       `Bearer ${authContainer.token.accessToken}`
     )
-    await TaskRepository.get(id)
+    await TaskRepository.create(taskForm)
       .then((response) => {
         setTask(convertApiTaskToTask(response.data))
       })
@@ -46,26 +42,25 @@ const useTaskDetail = () => {
         }
       })
       .finally(() => {
-        setIsFetching(false)
+        setIsCreating(false)
       })
   }
 
   return {
     task,
     setTask,
-    isFetching,
-    setIsFetching,
+    isCreating,
+    setIsCreating,
     isError,
     setIsError,
     errorStatus,
     setErrorStatus,
     errorData,
     setErrorData,
-    clearTask,
-    fetchTaskById,
+    createTask,
   }
 }
 
-const TaskDetailContainer = createContainer(useTaskDetail)
+const TaskCreateContainer = createContainer(useTaskCreate)
 
-export default TaskDetailContainer
+export default TaskCreateContainer
