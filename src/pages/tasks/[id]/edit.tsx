@@ -3,9 +3,8 @@ import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import Container from '@material-ui/core/Container'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import TaskDetailHeader from '../../../components/organisms/TaskDetailHeader'
-import TaskDetailBody from '../../../components/organisms/TaskDetailBody'
-import Spinner from '../../../components/atoms/Spinner'
+import EditTaskHeader from '../../../components/organisms/EditTaskHeader'
+import EditTaskBody from '../../../components/organisms/EditTaskBody'
 import AuthContainer from '../../../containers/auth-container'
 import TaskDetailContainer from '../../../containers/task-detail-container'
 
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
-const IndexPage: FC = () => {
+const EditPage: FC = () => {
   const classes = useStyles()
   const router = useRouter()
   const authContainer = AuthContainer.useContainer()
@@ -40,26 +39,22 @@ const IndexPage: FC = () => {
   return (
     <Fragment>
       <Head>
-        <title>Task Detail - Todo</title>
+        <title>Edit Task - Todo</title>
       </Head>
       <div className={classes.content}>
         <div className={classes.toolbar} />
         <Container maxWidth="sm">
           {!taskDetailContainer.isFetching && (
             <Fragment>
-              <TaskDetailHeader />
-              <TaskDetailBody />
+              <EditTaskHeader />
+              <EditTaskBody />
             </Fragment>
           )}
-          {taskDetailContainer.isFetching && (
-            <Fragment>
-              <Spinner />
-            </Fragment>
-          )}
+          {taskDetailContainer.isFetching && <Fragment />}
         </Container>
       </div>
     </Fragment>
   )
 }
 
-export default IndexPage
+export default EditPage

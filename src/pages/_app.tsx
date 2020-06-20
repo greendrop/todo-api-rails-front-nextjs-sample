@@ -9,6 +9,7 @@ import AuthContainer from '../containers/auth-container'
 import TaskListContainer from '../containers/task-list-container'
 import TaskDetailContainer from '../containers/task-detail-container'
 import TaskCreateContainer from '../containers/task-create-container'
+import TaskUpdateContainer from '../containers/task-update-container'
 import TaskFormContainer from '../containers/task-form-container'
 import AppContent from '../components/organisms/AppContent'
 
@@ -40,9 +41,11 @@ export default function MyApp(props: AppProps) {
             <TaskListContainer.Provider>
               <TaskDetailContainer.Provider>
                 <TaskCreateContainer.Provider>
-                  <TaskFormContainer.Provider>
-                    <AppContent {...props} />
-                  </TaskFormContainer.Provider>
+                  <TaskUpdateContainer.Provider>
+                    <TaskFormContainer.Provider>
+                      <AppContent {...props} />
+                    </TaskFormContainer.Provider>
+                  </TaskUpdateContainer.Provider>
                 </TaskCreateContainer.Provider>
               </TaskDetailContainer.Provider>
             </TaskListContainer.Provider>

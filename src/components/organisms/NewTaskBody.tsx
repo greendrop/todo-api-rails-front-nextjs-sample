@@ -22,8 +22,7 @@ const NewTaskBody: FC = () => {
         toast.error('Create Failed.')
       } else {
         toast.info('Created Task.')
-        const path = `/tasks/${taskCreateContainer.task.id}`
-        Router.push('/tasks/[id]', path)
+        Router.push('/tasks/[id]', `/tasks/${taskCreateContainer.task.id}`)
       }
     }
   }, [isCreated])
