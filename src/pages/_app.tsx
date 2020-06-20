@@ -8,12 +8,7 @@ import { parseCookies, setCookie } from 'nookies'
 import theme from '../themes/default'
 import AppBarAndDrawer from '../components/organisms/AppBarAndDrawer'
 import AuthContainer from '../containers/auth-container'
-import TaskListContainer from '../containers/task-list-container'
-import TaskDetailContainer from '../containers/task-detail-container'
-import TaskCreateContainer from '../containers/task-create-container'
-import TaskUpdateContainer from '../containers/task-update-container'
-import TaskDeleteContainer from '../containers/task-delete-container'
-import TaskFormContainer from '../containers/task-form-container'
+import GeneralContainer from '../containers/general-container'
 import { IOAuth2Token } from '../models/oauth2-token'
 import { IUser } from '../models/user'
 
@@ -41,21 +36,9 @@ export default function MyApp(props: AppProps) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <div style={{ display: 'flex' }}>
           <CssBaseline />
-          <AuthContainer.Provider>
-            <TaskListContainer.Provider>
-              <TaskDetailContainer.Provider>
-                <TaskCreateContainer.Provider>
-                  <TaskUpdateContainer.Provider>
-                    <TaskDeleteContainer.Provider>
-                      <TaskFormContainer.Provider>
-                        <MyAppContent {...props} />
-                      </TaskFormContainer.Provider>
-                    </TaskDeleteContainer.Provider>
-                  </TaskUpdateContainer.Provider>
-                </TaskCreateContainer.Provider>
-              </TaskDetailContainer.Provider>
-            </TaskListContainer.Provider>
-          </AuthContainer.Provider>
+          <GeneralContainer.Provider>
+            <MyAppContent {...props} />
+          </GeneralContainer.Provider>
         </div>
       </ThemeProvider>
       <ToastContainer />
