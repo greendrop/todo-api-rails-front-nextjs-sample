@@ -12,6 +12,7 @@ import TaskListContainer from '../containers/task-list-container'
 import TaskDetailContainer from '../containers/task-detail-container'
 import TaskCreateContainer from '../containers/task-create-container'
 import TaskUpdateContainer from '../containers/task-update-container'
+import TaskDeleteContainer from '../containers/task-delete-container'
 import TaskFormContainer from '../containers/task-form-container'
 import { IOAuth2Token } from '../models/oauth2-token'
 import { IUser } from '../models/user'
@@ -45,9 +46,11 @@ export default function MyApp(props: AppProps) {
               <TaskDetailContainer.Provider>
                 <TaskCreateContainer.Provider>
                   <TaskUpdateContainer.Provider>
-                    <TaskFormContainer.Provider>
-                      <MyAppContent {...props} />
-                    </TaskFormContainer.Provider>
+                    <TaskDeleteContainer.Provider>
+                      <TaskFormContainer.Provider>
+                        <MyAppContent {...props} />
+                      </TaskFormContainer.Provider>
+                    </TaskDeleteContainer.Provider>
                   </TaskUpdateContainer.Provider>
                 </TaskCreateContainer.Provider>
               </TaskDetailContainer.Provider>
