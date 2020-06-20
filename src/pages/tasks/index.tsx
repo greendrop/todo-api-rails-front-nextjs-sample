@@ -5,9 +5,11 @@ import Container from '@material-ui/core/Container'
 import Fab from '@material-ui/core/Fab'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import AuthContainer from '../../containers/auth-container'
 import TaskListHeader from '../../components/organisms/TaskListHeader'
 import TaskListBody from '../../components/organisms/TaskListBody'
+import Spinner from '../../components/atoms/Spinner'
+import AuthContainer from '../../containers/auth-container'
+import TaskListContainer from '../../containers/task-list-container'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +30,7 @@ const IndexPage: FC = () => {
   const classes = useStyles()
   const router = useRouter()
   const authContainer = AuthContainer.useContainer()
+  const taskListContainer = TaskListContainer.useContainer()
 
   useEffect(() => {
     localStorage.setItem('signedIn.backPath', router.asPath)
@@ -35,6 +38,17 @@ const IndexPage: FC = () => {
       Router.push('/users/sign_in')
     }
   }, [])
+
+  useEffect(() => {
+    const params = {}
+    if (router.query.page) {
+      params['page'] = router.query.page
+    }
+    if (router.query.per_page) {
+      params['perPage'] = router.query.per_page
+    }
+    taskListContainer.fetchTasks(params)
+  }, [router.query])
 
   return (
     <Fragment>
@@ -46,6 +60,11 @@ const IndexPage: FC = () => {
         <Container maxWidth="sm">
           <TaskListHeader />
           <TaskListBody />
+          {taskListContainer.isFetching && (
+            <Fragment>
+              <Spinner />
+            </Fragment>
+          )}
           <Fab
             color="primary"
             className={classes.fab}

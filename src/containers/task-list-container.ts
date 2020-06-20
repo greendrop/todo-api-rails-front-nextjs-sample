@@ -41,14 +41,21 @@ const useTaskList = () => {
     await TaskRepository.getList(params)
       .then((response) => {
         setTasks(response.data.map((data) => convertApiTaskToTask(data)))
+        let resPage = 1
+        let resPerPage = 10
         if (params.page) {
-          setPage(Number(params.page) || 0)
+          resPage = Number(params.page)
         }
         if (params.perPage) {
-          setPerPage(Number(params.perPage) || 0)
+          resPerPage = Number(params.perPage)
         }
-        setTotalCount(Number(response.headers.totalCount))
-        setMaxPage(totalCount === 0 ? 1 : Math.ceil(page / perPage))
+        const resTotalCount = Number(response.headers.totalCount)
+        setPage(resPage)
+        setPerPage(resPerPage)
+        setTotalCount(resTotalCount)
+        setMaxPage(
+          resTotalCount === 0 ? 1 : Math.ceil(resTotalCount / resPerPage)
+        )
       })
       .catch((error: AxiosError) => {
         setIsError(true)

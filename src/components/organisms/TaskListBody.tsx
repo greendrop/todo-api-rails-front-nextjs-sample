@@ -1,27 +1,41 @@
-import React, { FC, Fragment, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import React, { FC, Fragment } from 'react'
+import Router, { useRouter } from 'next/router'
+import Grid from '@material-ui/core/Grid'
+import Pagination from '@material-ui/lab/Pagination'
 import TaskListContainer from '../../containers/task-list-container'
 import TaskListItem from '../molecules/TaskListItem'
-import Spinner from '../atoms/Spinner'
 
 const TaskListBody: FC = () => {
-  const router = useRouter()
   const taskListContainer = TaskListContainer.useContainer()
-
-  useEffect(() => {
-    const params = {
-      page: router.query.page,
-      perPage: router.query.page,
-    }
-    taskListContainer.fetchTasks(params)
-  }, [])
+  const router = useRouter()
 
   return (
     <Fragment>
       {taskListContainer.tasks.map((task) => {
         return <TaskListItem key={task.id} task={task} />
       })}
-      {taskListContainer.isFetching && <Spinner />}
+      {taskListContainer.maxPage > 1 && (
+        <Grid container justify="center">
+          <Grid container item xs={12} justify="center">
+            <Pagination
+              count={taskListContainer.maxPage}
+              page={taskListContainer.page}
+              onChange={(event, page) => {
+                const query = {
+                  page: page,
+                }
+                if (router.query.per_page) {
+                  query['per_page'] = router.query.per_page
+                }
+                Router.push({
+                  pathname: '/tasks',
+                  query: query,
+                })
+              }}
+            />
+          </Grid>
+        </Grid>
+      )}
     </Fragment>
   )
 }
