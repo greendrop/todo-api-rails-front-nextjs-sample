@@ -32,7 +32,7 @@ const IndexPage: FC = () => {
   useEffect(() => {
     localStorage.setItem('signedIn.backPath', router.asPath)
     if (!authContainer.isSignedIn()) {
-      Router.push('/users/sign_in')
+      // Router.push('/users/sign_in')
     }
   }, [])
 
