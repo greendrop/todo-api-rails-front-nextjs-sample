@@ -17,7 +17,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@types/lodash": "^4.14.149",
     "@types/qs": "^6.9.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "axios-mock-adapter": "^1.18.1",
     "camelcase-keys": "^6.2.2",
     "dotenv": "^8.2.0",
